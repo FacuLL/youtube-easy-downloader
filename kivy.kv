@@ -1,0 +1,556 @@
+ScreenManager:
+	MainScreen:
+	SearchScreen:
+	LinkScreen:
+	DeleteScreen:
+	EditScreen:
+
+<MainScreen>:
+	name: 'main'
+	BoxLayout:
+		orientation: 'vertical'
+		canvas:
+	    	Color:
+	        	rgba: 255 / 255., 255 / 255., 255 / 255., 1
+	        Rectangle:
+	            pos: self.pos
+	            size: self.size
+		BoxLayout:
+			orientation: 'vertical'
+			size_hint: 1, 0.3
+	        BoxLayout:
+	        	orientation:'vertical'
+	        	size_hint: 1, 0.5
+			    canvas:
+			    	Color:
+			        	rgba: 200 / 255., 0 / 255., 0 / 255., 1
+			        Rectangle:
+			            pos: self.pos
+			            size: self.size
+			    Label:
+	        		text: 'Youtube Easy Downloader'
+	        		font_size: 25
+	        	Label:
+	        		text: 'By FLL'
+	        		font_size: 15
+	        BoxLayout:
+	        	orientation: 'horizontal'
+	        	size_hint: 1, 0.5
+	        	canvas:
+			    	Color:
+			        	rgba: 200 / 255., 0 / 255., 0 / 255., 1
+			        Rectangle:
+			            pos: self.pos
+			            size: self.size
+			    Button:
+			    	size_hint: 0.3, 0.8
+			    	text: 'Search in Youtube'
+			    	pos_hint: {'x': .2, 'center_y': .5}
+			    	on_release: 
+			    		app.root.current = "search"
+			    		root.manager.transition.direction = 'left'
+			    Button:
+			    	text: 'Insert link'
+			    	size_hint: 0.3, 0.8
+					pos_hint: {'x': .2, 'center_y': .5}
+					on_release: 
+			    		app.root.current = "link"
+			    		root.manager.transition.direction = 'left'
+		BoxLayout:
+			orientation: 'horizontal'
+			size_hint: 1, 0.55
+			BoxLayout:
+				orientation: 'vertical'
+				canvas:
+		    		Color:
+		    			rgba: 255 / 255., 255 / 255., 255 / 255., 1
+		    		Rectangle:
+		                pos: self.pos
+		                size: self.size
+				Label:
+		        	text: ''
+		        	size_hint: 1, 0.08
+				Label:
+					text:'List'
+					size_hint: 1, 0.2
+					color: 0,0,0,1
+					font_size: 40
+				TextInput:
+					id: songlist
+					size_hint: 1, 0.45
+					text: ''
+					readonly: True
+				BoxLayout:
+					orientation: 'horizontal'
+					size_hint: 1, 0.2
+					Button:
+						text: 'Delete'
+						on_release:
+							app.root.current = "delete"
+			    			root.manager.transition.direction = 'right'
+					Button:
+						text: 'Edit Name'
+						on_release:
+							app.root.current = "editname"
+			    			root.manager.transition.direction = 'right'
+				Label:
+					text: ''
+					size_hint: 1, 0.02
+			BoxLayout:
+				orientation: 'vertical'
+				canvas:
+		    		Color:
+		    			rgba: 255 / 255., 255 / 255., 255 / 255., 1
+		    		Rectangle:
+		                pos: self.pos
+		                size: self.size
+		        Label:
+		        	text: ''
+		        	size_hint: 1, 0.1
+				Label:
+					text:'Ubication'
+					size_hint: 1, 0.2
+					color: 0,0,0,1
+					font_size: 40
+				TextInput:
+					id: ubication
+					text: ''
+					size_hint: 1, 0.3
+					readonly: True
+				Button:
+					text:'Explore'
+					size_hint: 1, 0.15
+					on_release:
+						root.explore()
+				Label:
+					text: ''
+					size_hint: 1,0.1
+		BoxLayout:
+			size_hint: 1, 0.08
+			canvas:
+	    		Color:
+	    			rgba: 255 / 255., 255 / 255., 255 / 255., 1
+	    		Rectangle:
+	                pos: self.pos
+	                size: self.size
+			Button:
+				size_hint: 0.5, 0.8
+				pos_hint: {'center_x': .5, 'center_y': .5}
+				text: 'Start Download'
+				font_size: 20
+				on_release: root.startDownload()
+		BoxLayout:
+			size_hint: 1, 0.07
+			canvas:
+	    		Color:
+	    			rgba: 255 / 255., 255 / 255., 255 / 255., 1
+	    		Rectangle:
+	                pos: self.size
+	                size: self.size
+	        Label:
+	        	id: loading
+	        	text: ''
+	        	color: 0,0,0,1
+
+<SearchScreen>:
+	name: "search"
+	BoxLayout:
+		orientation: 'vertical'
+		BoxLayout:
+			canvas:
+		    	Color:
+		        	rgba: 200 / 255., 0 / 255., 0 / 255., 1
+		        Rectangle:
+		            pos: self.pos
+		            size: self.size
+		    size_hint: 1, 0.15
+		    Button:
+		    	text: 'Go back'
+		    	size_hint: 0.2, 1
+		    	on_release:
+		    		app.root.current = "main"
+			    	root.manager.transition.direction = 'right'
+			Label:
+				text: 'Youtube Search'
+				font_size: 25
+		BoxLayout:
+			orientation: 'horizontal'
+			canvas:
+		    	Color:
+		        	rgba: 255 / 255., 255 / 255., 255 / 255., 1
+		        Rectangle:
+		            pos: self.pos
+		            size: self.size
+		    size_hint: 1, 0.2
+		    Label:
+				size_hint: 0.065, 1
+				text: ''
+			TextInput:
+				id: searchkey
+				size_hint: 0.65, 0.7
+				pos_hint: {'center_x': .5, 'center_y': .5}
+				text: ''
+			Label:
+				size_hint: 0.02, 1
+				text: ''
+			Button:
+				size_hint: 0.2, 0.7
+				pos_hint: {'center_x': .5, 'center_y': .5}
+				text: 'Search'
+				font_size:15
+				on_release: root.doSearch(searchkey, lbs1, lbs2, lbs3, lbs4, lbs5)
+			Label:
+				size_hint: 0.065, 1
+				text: ''
+		BoxLayout:
+			orientation: 'vertical'
+			canvas:
+		    	Color:
+		        	rgba: 255 / 255., 255 / 255., 255 / 255., 1
+		        Rectangle:
+		            pos: self.pos
+		            size: self.size
+		    BoxLayout:
+		    	orientation:'horizontal'
+				Label:
+					id: lbs1
+					size_hint: 0.908, 1
+					text: ''
+					color: 0, 0, 0, 1
+				ClickableImage:
+					id: plus1
+					source: ''
+					size_hint: 0.042, 1
+					disabled: True
+					on_release: 
+						root.selectSearch(1)
+						app.root.current = "main"
+				    	root.manager.transition.direction = 'right'
+				    	app.root.get_screen('main').refreshList(app.root.get_screen('main').ids.songlist)
+				ClickableImage:
+					id: play1
+					source: ''
+					size_hint: 0.05, 1
+					disabled: True
+					on_release: 
+						root.playSong(1)
+			BoxLayout:
+		    	orientation:'horizontal'
+				Label:
+					id: lbs2
+					text: ''
+					color: 0, 0, 0, 1
+				ClickableImage:
+					id: plus2
+					source: ''
+					size_hint: 0.042, 1
+					disabled: True
+					on_release: 
+						root.selectSearch(2)
+						app.root.current = "main"
+				    	root.manager.transition.direction = 'right'
+				    	app.root.get_screen('main').refreshList(app.root.get_screen('main').ids.songlist)
+				ClickableImage:
+					id: play2
+					source: ''
+					size_hint: 0.05, 1
+					disabled: True
+					on_release: 
+						root.playSong(2)
+			BoxLayout:
+		    	orientation:'horizontal'
+				Label:
+					id: lbs3
+					text: ''
+					color: 0, 0, 0, 1
+				ClickableImage:
+					id: plus3
+					source: ''
+					size_hint: 0.042, 1
+					disabled: True
+					on_release: 
+						root.selectSearch(3)
+						app.root.current = "main"
+				    	root.manager.transition.direction = 'right'
+				    	app.root.get_screen('main').refreshList(app.root.get_screen('main').ids.songlist)
+				ClickableImage:
+					id: play3
+					source: ''
+					size_hint: 0.05, 1
+					disabled: True
+					on_release: 
+						root.playSong(3)
+			BoxLayout:
+		    	orientation:'horizontal'
+				Label:
+					id: lbs4
+					text: ''
+					color: 0, 0, 0, 1
+				ClickableImage:
+					id: plus4
+					source: ''
+					size_hint: 0.042, 1
+					disabled: True
+					on_release: 
+						root.selectSearch(4)
+						app.root.current = "main"
+				    	root.manager.transition.direction = 'right'
+				    	app.root.get_screen('main').refreshList(app.root.get_screen('main').ids.songlist)
+				ClickableImage:
+					id: play4
+					source: ''
+					size_hint: 0.05, 1
+					disabled: True
+					on_release: 
+						root.playSong(4)
+			BoxLayout:
+		    	orientation:'horizontal'
+				Label:
+					id: lbs5
+					text: ''
+					color: 0, 0, 0, 1
+				ClickableImage:
+					id: plus5
+					source: ''
+					size_hint: 0.042, 1
+					disabled: True
+					on_release: 
+						root.selectSearch(5)
+						app.root.current = "main"
+				    	root.manager.transition.direction = 'right'
+				    	app.root.get_screen('main').refreshList(app.root.get_screen('main').ids.songlist)
+				ClickableImage:
+					id: play5
+					source: ''
+					size_hint: 0.05, 1
+					disabled: True
+					on_release: 
+						root.playSong(5)
+
+<LinkScreen>:
+	name: "link"
+	BoxLayout:
+		orientation: 'vertical'
+		BoxLayout:
+			canvas:
+		    	Color:
+		        	rgba: 200 / 255., 0 / 255., 0 / 255., 1
+		        Rectangle:
+		            pos: self.pos
+		            size: self.size
+		    size_hint: 1, 0.15
+		    Button:
+		    	text: 'Go back'
+		    	size_hint: 0.2, 1
+		    	on_release:
+		    		app.root.current = "main"
+			    	root.manager.transition.direction = 'right'
+			Label:
+				text: 'Youtube Link'
+				font_size: 25
+		BoxLayout:
+			orientation: 'horizontal'
+			canvas:
+		    	Color:
+		        	rgba: 255 / 255., 255 / 255., 255 / 255., 1
+		        Rectangle:
+		            pos: self.pos
+		            size: self.size
+		    size_hint: 1, 0.2
+		    Label:
+				size_hint: 0.065, 1
+				text: ''
+			TextInput:
+				id: link
+				size_hint: 0.65, 0.7
+				pos_hint: {'center_x': .5, 'center_y': .5}
+				text: ''
+			Label:
+				size_hint: 0.02, 1
+				text: ''
+			Button:
+				size_hint: 0.2, 0.7
+				pos_hint: {'center_x': .5, 'center_y': .5}
+				text: 'Get song'
+				font_size:15
+				on_release: 
+					root.getLink(link)
+					root.manager.transition.direction = 'right'
+					app.root.get_screen('main').refreshList(app.root.get_screen('main').ids.songlist)
+			Label:
+				size_hint: 0.065, 1
+				text: ''
+		BoxLayout:
+			orientation: 'vertical'
+			canvas:
+		    	Color:
+		        	rgba: 255 / 255., 255 / 255., 255 / 255., 1
+		        Rectangle:
+		            pos: self.pos
+		            size: self.size
+		    Label:
+		    	id: linkerror
+		    	text:''
+		    	color: 0,0,0,1
+
+<EditScreen>:
+	name: 'editname'
+	BoxLayout:
+		orientation:'vertical'
+		BoxLayout:
+			canvas:
+		    	Color:
+		        	rgba: 200 / 255., 0 / 255., 0 / 255., 1
+		        Rectangle:
+		            pos: self.pos
+		            size: self.size
+		    size_hint: 1, 0.25
+		BoxLayout:
+			orientation:'horizontal'
+			canvas:
+		    	Color:
+		        	rgba: 200 / 255., 0 / 255., 0 / 255., 1
+		        Rectangle:
+		            pos: self.pos
+		            size: self.size
+		    size_hint: 1, 0.1
+		    Button:
+		    	text: 'Go back'
+		    	size_hint: 0.2, 1
+		    	on_release:
+		    		app.root.current = "main"
+			    	root.manager.transition.direction = 'left'
+			Label:
+				text: 'Edit song name'
+				font_size: 25
+		BoxLayout:
+			orientation:'horizontal'
+			canvas:
+		    	Color:
+		        	rgba: 255 / 255., 255 / 255., 255 / 255., 1
+		        Rectangle:
+		            pos: self.pos
+		            size: self.size
+		    size_hint: 1, 0.1
+			Label:
+				text:'Song Id'
+				color: 0,0,0,1
+			TextInput:
+				id: editsongid
+				text: ''
+		BoxLayout:
+			orientation:'horizontal'
+			canvas:
+				Color:
+					rgba: 255 / 255., 255 / 255., 255 / 255., 1
+				Rectangle:
+					pos: self.pos
+					size: self.size
+			size_hint: 1, 0.1
+			Label:
+				text:'New Name'
+				color: 0,0,0,1
+			TextInput:
+				id: editsongname
+				text: ''
+		Button:
+			text: 'Edit name'
+			size_hint: 1, 0.1
+			on_release:
+				root.manager.transition.direction = 'left'
+				root.editName(editsongid, editsongname)
+				app.root.get_screen('main').refreshList(app.root.get_screen('main').ids.songlist)
+		BoxLayout:
+			canvas:
+		    	Color:
+		        	rgba: 200 / 255., 0 / 255., 0 / 255., 1
+		        Rectangle:
+		            pos: self.pos
+		            size: self.size
+			size_hint: 1, 0.1
+			Label:
+				id: editerror
+				text: ''
+				color: 0,0,0,1
+		BoxLayout:
+			canvas:
+		    	Color:
+		        	rgba: 200 / 255., 0 / 255., 0 / 255., 1
+		        Rectangle:
+		            pos: self.pos
+		            size: self.size
+		    size_hint: 1, 0.35
+
+<DeleteScreen>:
+	name: 'delete'
+	BoxLayout:
+		orientation:'vertical'
+		BoxLayout:
+			canvas:
+		    	Color:
+		        	rgba: 200 / 255., 0 / 255., 0 / 255., 1
+		        Rectangle:
+		            pos: self.pos
+		            size: self.size
+		    size_hint: 1, 0.25
+		BoxLayout:
+			orientation:'horizontal'
+			canvas:
+		    	Color:
+		        	rgba: 200 / 255., 0 / 255., 0 / 255., 1
+		        Rectangle:
+		            pos: self.pos
+		            size: self.size
+		    size_hint: 1, 0.1
+		    Button:
+		    	text: 'Go back'
+		    	size_hint: 0.2, 1
+		    	on_release:
+		    		app.root.current = "main"
+			    	root.manager.transition.direction = 'left'
+			Label:
+				text: 'Delete song from list'
+				font_size: 25
+		BoxLayout:
+			orientation:'horizontal'
+			canvas:
+		    	Color:
+		        	rgba: 255 / 255., 255 / 255., 255 / 255., 1
+		        Rectangle:
+		            pos: self.pos
+		            size: self.size
+		    size_hint: 1, 0.1
+			Label:
+				text:'Song Id'
+				color: 0,0,0,1
+			TextInput:
+				id: deletesongid
+				text: ''
+		Button:
+			text: 'Delete song'
+			size_hint: 1, 0.1
+			on_release:
+				root.manager.transition.direction = 'left'
+				root.deleteSong(deletesongid)
+				app.root.get_screen('main').refreshList(app.root.get_screen('main').ids.songlist)
+		BoxLayout:
+			canvas:
+		    	Color:
+		        	rgba: 200 / 255., 0 / 255., 0 / 255., 1
+		        Rectangle:
+		            pos: self.pos
+		            size: self.size
+			size_hint: 1, 0.1
+			Label:
+				id: deleteerror
+				text: ''
+				color: 0,0,0,1
+		BoxLayout:
+			canvas:
+		    	Color:
+		        	rgba: 200 / 255., 0 / 255., 0 / 255., 1
+		        Rectangle:
+		            pos: self.pos
+		            size: self.size
+		    size_hint: 1, 0.45
+
