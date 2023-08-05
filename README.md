@@ -11,4 +11,6 @@ Aplicación Desktop (.exe) hecha con Python utilizando librerias como Kivy, Pytu
 
 <p align="center">
   <img src="https://github.com/FacuLL/youtube-easy-downloader/assets/69525757/324bb053-4cd1-47b6-bc6b-f85b072c9890" width="400px" />
+  <img src="https://github.com/FacuLL/youtube-easy-downloader/assets/69525757/e4621f41-21dc-4215-a997-e261b5aca807" width="400px" />
 </p>
+
