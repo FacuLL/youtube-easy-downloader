@@ -1,0 +1,6 @@
+youtube-search-python
+pytube
+kivy
+tk
+ffmpeg
+pyinstaller
